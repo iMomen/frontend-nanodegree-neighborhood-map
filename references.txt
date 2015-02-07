@@ -6,3 +6,17 @@ https://www.youtube.com/watch?v=tlntE8fe6u4
 
 Stackoverflow post on getting node to work in GitBash on Windows7
 http://stackoverflow.com/questions/8543296/sh-exe-node-command-not-found
+
+Bower's website
+http://bower.io/
+
+Knockout's website
+http://knockoutjs.com/index.html
+
+Myriad conversations with fellow Udacians in HipChat
+
+Google Maps JavaScript API documentation - Getting Started tutorial
+https://developers.google.com/maps/documentation/javascript/tutorial
+
+Video from Google:  Google Maps Garage - Where's My Map!
+https://www.youtube.com/watch?v=21PDd17dnnI#t=62

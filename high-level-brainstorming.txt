@@ -1,0 +1,152 @@
+					
+						Project 5 Notes
+						---------------
+						---------------
+
+
+					checking out the p5s of others for inspiration
+					----------------------------------------------
+I want to give a shoutout and thanks to all of my fellow students (mentioned below) 
+who worked diligently to build projects that I viewed for inspiration.  
+
+Dallas Frank:
+demo: http://slomer.github.io/Neighborhood-Map-Project-5/
+github: https://github.com/Slomer/Neighborhood-Map-Project-5
+
+Kevin Mayo 
+demo: http://kevdonk.github.io/frontend-nanodegree-map/
+github: https://github.com/kevdonk/frontend-nanodegree-map 
+
+Dawoon Choi: 
+website: http://dw-neighborhood.appspot.com
+github repo: https://github.com/DawoonC/dw-neighborhood
+
+Haopei Yang:
+demo: http://haopei.github.io/p5_neighbourhood_map/dist/
+github: https://github.com/haopei/p5_neighbourhood_map/tree/gh-pages 
+
+Ben Halperin:
+Website: http://bahalps.github.io/frontend-nanodegree-neighborhood-map/
+Github: https://github.com/bahalps/frontend-nanodegree-neighborhood-map
+
+Lei Zhu:
+My project demo: http://lei-clearsky.github.io/neighborhood-map/
+My project repo: https://github.com/lei-clearsky/neighborhood-map-seperate-model
+
+
+					Features to include in my project
+					---------------------------------
+
+gyms/health clubs in chosen city
+
+expandable/collapsable, scrollable list view (expanded by default)
+
+in each list item:
+
+poi title
+address
+button to access photos (photos via some api)
+rating (rating via some api)
+phone number 
+website
+icons next to each piece of info (see Lei Zhu's project)
+a photo displayed by default that is like the street view of the building (via some api)
+when list item is selected, it is made obvious by some animation (see Ben's project)
+
+for each map marker: 
+
+animate marker to make selected one stand out (enlarge?)
+display info window upon clicking of marker
+
+
+for each info window: 
+
+same as stuff provided in list item, but no photos displayed by default and no button for photos
+
+for the search bar: 
+
+make it similar to Haopei's
+
+search bar that takes in a city name and, upon hitting enter with city 
+name entered, renders the map to display all the gyms for that particular city
+
+display a message saying how many gyms were found (see Haopei's project)
+
+the city defaults to the location of the user, grabbed before initial page render
+
+
+
+
+					Google APIs to possibly use
+					---------------------------
+
+----------------------------
+Google Maps JavaScript API 	|
+Google Places API			|
+Google Maps Embed API 		|
+----------------------------
+
+Google Maps JavaScript API
+--------------------------
+Data layer in the Google Maps JavaScript API
+Overlays in the Google Maps JavaScript API (example)
+Styles in the Google Maps JavaScript API (example)
+Google Places library in the Google Maps JavaScript API (example)
+Google Places Autocomplete widget in the Google Maps JavaScript API (example)
+
+Google Places API
+-----------------
+Google Places API (a web service)
+Photos service in the Google Places API (a web service)
+Google Places Autocomplete (a web service)
+
+Google Maps Embed API
+---------------------
+Google Maps Embed API (a web service)
+
+
+
+
+Google Maps Embed API (a web service)
+Retrieve an interactive map for display on a web page, via a simple HTTP request consisting of just the URL and parameters, free of charge and with no usage limits or quotas. Embed the map by setting the map URL as the src attribute of an iFrame. Useful in blogs and other places where you can't add <script> tags.
+
+
+Data layer in the Google Maps JavaScript API
+Visualize features and arbitrary data on a map.
+
+
+Overlays in the Google Maps JavaScript API (examples)
+Draw polygons, rectangles, polylines, circles, markers and info windows on a map.
+
+
+Overlays in the Google Maps JavaScript API (example)
+Add an image to a map, as an overlay at a specified location.
+
+
+Styles in the Google Maps JavaScript API (example)
+Customize the look of a map.
+
+
+Google Places library in the Google Maps JavaScript API (examples)
+Google Places API (a web service)
+Find nearby businesses and other places, or search for businesses and other places by category/type or query string.
+
+
+Google Places library in the Google Maps JavaScript API (example)
+Google Places API (a web service)
+Get the name, address, opening hours, and other details of a place, including customer ratings and reviews.
+
+
+Google Places Autocomplete widget in the Google Maps JavaScript API (example)
+Google Places Autocomplete (a web service)
+Add the type-ahead search behavior of the Google Maps search field to your app.
+
+
+Photos service in the Google Places API (a web service)
+Find photos of businesses and other points of interest, sourced from the Places and Google+ databases.
+
+
+Google Maps Embed API (a web service)
+Display search results for the visible region on a map, including nearby businesses and other places.
+
+

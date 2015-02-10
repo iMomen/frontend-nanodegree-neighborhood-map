@@ -20,3 +20,12 @@ https://developers.google.com/maps/documentation/javascript/tutorial
 
 Video from Google:  Google Maps Garage - Where's My Map!
 https://www.youtube.com/watch?v=21PDd17dnnI#t=62
+
+Free online tool to convert addresses to lat, long
+http://www.latlong.net/convert-address-to-lat-long.html
+
+Google Maps JavaScript API documentation - Markers tutorial
+https://developers.google.com/maps/documentation/javascript/markers
+
+Google Maps JavaScript API documentation - Info Windows tutorial
+https://developers.google.com/maps/documentation/javascript/infowindows

@@ -11,15 +11,51 @@
         padding: 0px
       }
     </style>
+
     <script>
+
+var map; 
+var gyms = {
+	"gyms": [
+		{
+			"name": "Princeton Club - West",
+			"lat": 43.054723, 
+			"lng": -89.519298
+		}, 
+		{
+			"name": "Planet Fitness",
+			"lat": 43.058620, 
+			"lng": -89.512261
+		},
+		{
+			"name": "9Round Kickboxing Fitness - Madison West",
+			"lat": 43.061463, 
+			"lng": -89.496102
+		}
+	] 
+};
+
+gyms.display = function() {
+	for (gym in gyms.gyms) {
+		var latLng = new google.maps.LatLng(gyms.gyms[gym].lat, gyms.gyms[gym].lng);
+		var marker = new google.maps.Marker({
+		    position: latLng,
+		    map: map,
+		    title: gyms.gyms[gym].name
+		});
+	}
+}
+
 function initialize() {
   var mapOptions = {
-    zoom: 8,
-    center: new google.maps.LatLng(-34.397, 150.644)
+    zoom: 12,
+    center: new google.maps.LatLng(43.074399, -89.536479)
   };
 
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
+  map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
+
+  gyms.display();
 }
 
 function loadScript() {
@@ -33,6 +69,7 @@ function loadScript() {
 window.onload = loadScript;
 
     </script>
+
   </head>
   <body>
     <div id="map-canvas"></div>

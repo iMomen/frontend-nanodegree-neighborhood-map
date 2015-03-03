@@ -29,3 +29,12 @@ https://developers.google.com/maps/documentation/javascript/markers
 
 Google Maps JavaScript API documentation - Info Windows tutorial
 https://developers.google.com/maps/documentation/javascript/infowindows
+
+Google Maps JavaScript API documentation - Controls tutorial
+https://developers.google.com/maps/documentation/javascript/controls
+
+Google Maps JavaScript API documentation - Listening to DOM Events
+https://developers.google.com/maps/documentation/javascript/events#DomEvents
+
+Google Maps JavaScript API documentation - Places Library Tutorial
+https://developers.google.com/maps/documentation/javascript/places

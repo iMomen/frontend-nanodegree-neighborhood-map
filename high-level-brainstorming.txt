@@ -37,7 +37,7 @@ My project repo: https://github.com/lei-clearsky/neighborhood-map-seperate-model
 					Features to include in my project
 					---------------------------------
 
-gyms/health clubs in chosen city
+gyms in chosen city
 
 expandable/collapsable, scrollable list view (expanded by default)
 
@@ -67,13 +67,14 @@ for the search bar:
 
 make it similar to Haopei's
 
-search bar that takes in a city name and, upon hitting enter with city 
+search bar that takes in a city name or address and, upon hitting enter with city 
 name entered, renders the map to display all the gyms for that particular city
 
 display a message saying how many gyms were found (see Haopei's project)
 
-the city defaults to the location of the user, grabbed before initial page render
+the city defaults to my city (Madison, WI)
 
+implement button labeled "Use Current Location" and the app will grab the current location of the user and display the appropriate results
 
 
 
@@ -103,9 +104,6 @@ Google Places Autocomplete (a web service)
 Google Maps Embed API
 ---------------------
 Google Maps Embed API (a web service)
-
-
-
 
 Google Maps Embed API (a web service)
 Retrieve an interactive map for display on a web page, via a simple HTTP request consisting of just the URL and parameters, free of charge and with no usage limits or quotas. Embed the map by setting the map URL as the src attribute of an iFrame. Useful in blogs and other places where you can't add <script> tags.
@@ -150,191 +148,4 @@ Google Maps Embed API (a web service)
 Display search results for the visible region on a map, including nearby businesses and other places.
 
 
-List of Locations (37 total)
------------------
-1
-Princeton Club - West
-8080 Watts Road
-Madison, WI 53719
-
-2
-Planet Fitness
-7475 Mineral Point Road
-Madison, WI 53717
-
-3
-9Round Kickboxing Fitness - Madison West
-Clock Tower Court
-6636 Mineral Point Road
-Madison, WI 53705
-
-4
-Madison Body Fitness
-5555 Odana Road
-Madison, WI 53719
-
-5
-Orange Shoe Personal Fitness
-601 Junction Road
-Madison, WI 53717
-
-6
-Fourier Fitness
-999 Fourier Drive
-Madison, WI 53717
-
-7
-SwimWest Swim School
-1001 Deming Way
-Madison, WI 53717
-
-8
-Anytime Fitness
-1011 North Gammon Road
-Middleton, WI 53562
-
-9
-Madtown Twisters Gymnastics - West
-7035 Old Sauk Road
-Madison, WI 53717
-
-10
-The FitZone
-6105 Odana Road
-Madison, WI 53719
-
-11
-Fit Body Boot Camp Madison
-5617 Odana Road
-Madison, WI 53719
-
-12
-The Combine
-8845 South Greenview Drive #1
-Middleton, WI 53562
-
-13
-Body Mechanix
-7781 Elmwood Avenue #112
-Middleton, WI 53562
-
-14
-The Little Gym of Middleton
-1920 Cayuga Street
-Middleton, WI 53562
-
-15
-Cross Fit Madtown
-3160 Deming Way
-Middleton, WI 53562
-
-16
-Princeton Club Xpress
-2510 Allen Boulevard
-Middleton, WI 53562
-
-17
-Snap Fitness Madison West
-737 University Row
-Madison West, WI 53705
-
-18
-Anytime Fitness
-2980 Cahill Main
-Fitchburg, WI 53711
-
-19
-Gold's Gym
-2920 Hard Rock Rd
-Fitchburg, WI 53719
-
-20
-Orange Shoe Personal Fitness
-6200 Nesbitt Road
-Fitchburg, WI 53719
-
-21
-Anytime Fitness
-6250 Nesbitt Road #600
-Madison, WI 53719
-
-22
-Gymfinity
-6300 Nesbitt Road
-Fitchburg, WI 53719
-
-23
-UW SERF
-715 West Dayton Street
-Madison, WI 53715
-
-24
-iGO Fitness
-202 State Street #303
-Madison, WI 53703
-
-25
-Anytime Fitness
-301 East Campus Mall #203
-Madison, WI 53715
-
-26
-Orange Shoe Personal Fitness
-1 East Main Street
-Madison, WI 53703
-
-27
-Pat's Gym
-931 East Main Street
-Madison, WI 53703
-
-28
-Fitness Solutions
-2701 University Avenue
-Madison, WI 53705
-
-29
-Monkey Bar Gym
-1876 East Washington Avenue
-Madison, WI 53704
-
-30
-Twisted Fitness
-2114 Winnebago Street
-Madison, WI 53704
-
-31
-Snap Fitness Madison
-2045 Atwood Ave., Suite 101
-Madison, WI 53704
-
-32
-Badger Fitness 24/7
-2040 South Stoughton Road
-Madison, WI 53716
-
-33
-CrossFit Sanctify
-4535 Helgesen Drive
-Madison, WI 53718
-
-34
-Fun Function Fitness
-4510 Femrite Drive
-Madison, WI 53716
-
-35
-Curves
-6300 Monona Drive
-Madison, WI 53716
-
-36
-Anytime Fitness
-6000 Monona Drive
-Monona, WI 53716
-
-37
-Planet Fitness
-2305 West Broadway
-Monona, WI 53713
 

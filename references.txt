@@ -38,3 +38,9 @@ https://developers.google.com/maps/documentation/javascript/events#DomEvents
 
 Google Maps JavaScript API documentation - Places Library Tutorial
 https://developers.google.com/maps/documentation/javascript/places
+
+Google Maps JavaScript API documentation - Autocomplete Tutorial
+https://developers.google.com/maps/documentation/javascript/places-autocomplete
+
+Google Maps JavaScript API documentation - Autocomplete Hotel Search Example
+https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-hotelsearch

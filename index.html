@@ -10,21 +10,32 @@
         margin: 0px;
         padding: 0px
       }
+      #pac-input {
+        width: 350px; 
+        height: 25px;
+        font-size: 16px; 
+        margin: 10px; 
+        padding: 5px
+      }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
     <script>
 var map, 
     infowindow, 
     autocomplete, 
-    service; 
+    service, 
+    controlList;
 
-var markers = [];
+var markers = [], 
+    gyms = [];
 
 function initialize() {
   var madison = new google.maps.LatLng(43.0667, -89.4000), 
       mapOptions = {
         center: madison,
-        zoom: 12
+        zoom: 12, 
+        streetViewControl: false, 
+        mapTypeControl: false
       }, 
       autocompleteOptions = {
         types: ['(cities)']
@@ -37,8 +48,13 @@ function initialize() {
   var input = document.getElementById('pac-input');
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-  autocomplete = new google.maps.places.Autocomplete(input, autocompleteOptions);
+  // Create the DIV to hold the control and call the 
+  // ListControl() constructor passing in this DIV.
+  var listControlDiv = document.createElement('div');
+  var listControl = new ListControl(listControlDiv, map);
+  map.controls[google.maps.ControlPosition.LEFT_TOP].push(listControlDiv);
 
+  autocomplete = new google.maps.places.Autocomplete(input, autocompleteOptions);
   service = new google.maps.places.PlacesService(map);
 
   var request = {
@@ -47,8 +63,44 @@ function initialize() {
     types: ['gym']
   };
   service.nearbySearch(request, callback);
-
   google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
+}
+
+/**
+ * The ListControl adds a control to the map that
+ * displays the search results in a list view. This 
+ * constructor takes the control DIV as an argument.
+ */
+function ListControl(controlDiv, map) {
+
+  var madison = new google.maps.LatLng(43.0667, -89.4000);
+
+  // Set CSS styles for the DIV containing the control
+  // Setting padding to 5 px will offset the control
+  // from the edge of the map.
+  controlDiv.style.padding = '10px';
+
+  // Set CSS for the control border.
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = 'white';
+  controlUI.style.borderStyle = 'solid';
+  controlUI.style.borderWidth = '1px';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'List of gyms returned by search';
+  controlDiv.appendChild(controlUI);
+
+  // Set CSS for the control interior.
+  controlList = document.createElement('ul');
+  controlList.style.fontFamily = 'Arial,sans-serif';
+  controlList.style.fontSize = '16px';
+  controlList.style.padding = '5px';
+  controlUI.appendChild(controlList);
+
+  // Setup the click event listeners: simply set the map to Chicago.
+  google.maps.event.addDomListener(controlUI, 'click', function() {
+    map.setCenter(madison)
+  });
 }
 
 // When the user selects a city, perform a nearbySearch() 
@@ -65,18 +117,21 @@ function onPlaceChanged() {
       types: ['gym']
     };
     service.nearbySearch(request, callback);
+    buildListView();
   } else {
-    document.getElementById('pac-input').placeholder = 'Enter a valid city name';
+    document.getElementById('pac-input').placeholder = 'Start typing city name, then select one from list';
   }
 
 }
 
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
-      markers[i] = createMarker(results[i]);
+    gyms = results;
+    for (var i = 0; i < gyms.length; i++) {
+      markers[i] = createMarker(gyms[i]);
     }
   }
+  buildListView();
 }
 
 function createMarker(place) {
@@ -103,6 +158,17 @@ function clearMarkers() {
   markers = [];
 }
 
+function buildListView() {
+  controlList.innerHTML = '';
+  for (var i = 0; i < gyms.length; i++) {
+    if (gyms[i]) {
+      var li = document.createElement('li');
+      li.innerHTML = gyms[i].name;
+      controlList.appendChild(li);
+    }
+  }
+}
+
 google.maps.event.addDomListener(window, 'load', initialize);  
 
     </script>
@@ -110,7 +176,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
   <body>
 
     <input id="pac-input" class="controls" type="text"
-      placeholder="Enter your city name">
+      placeholder="Start typing city name, then select one from list">
 
     <div id="map-canvas"></div>
 

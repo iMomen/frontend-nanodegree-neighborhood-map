@@ -44,3 +44,18 @@ https://developers.google.com/maps/documentation/javascript/places-autocomplete
 
 Google Maps JavaScript API documentation - Autocomplete Hotel Search Example
 https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-hotelsearch
+
+Stackoverflow post - Add/remove HTML inside div using JavaScript
+http://stackoverflow.com/questions/17650776/add-remove-html-inside-div-using-javascript
+
+Stackoverflow post - Need an unordered list without any bullets
+http://stackoverflow.com/questions/1027354/need-an-unordered-list-without-any-bullets
+
+Mozilla article on list-style-type for HTML uls
+https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
+
+Stackoverflow post - Adding scroll bar to dynamic ul li
+http://stackoverflow.com/questions/20746745/adding-scroll-bar-to-dynamic-ul-li
+
+w3schools article - CSS Image Opacity / Transparency
+http://www.w3schools.com/css/css_image_transparency.asp

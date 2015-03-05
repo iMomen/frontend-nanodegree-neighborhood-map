@@ -17,11 +17,45 @@
         margin: 10px; 
         padding: 5px
       }
+      ul {
+        z-index: 2; /* Fixes infoWindow and list view overlap issue */
+      }
+      li:hover {
+        background: gray;
+        color: white;
+      }
+      table {
+        font-size: 12px;
+      }
+      .placeIcon {
+        width: 20px;
+        height: 34px;
+        margin: 4px;
+      }
+      .hotelIcon {
+        width: 24px;
+        height: 24px;
+      }
+      #rating {
+        font-size: 13px;
+        font-family: Arial Unicode MS;
+      }
+      .iw_table_row {
+        height: 18px;
+      }
+      .iw_attribute_name {
+        font-weight: bold;
+        text-align: right;
+      }
+      .iw_table_icon {
+        text-align: right;
+      }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
     <script>
-var map, 
-    infowindow, 
+var madison, 
+    map, 
+    infoWindow, 
     autocomplete, 
     service, 
     controlList;
@@ -29,8 +63,10 @@ var map,
 var markers = [], 
     gyms = [];
 
+var hostnameRegexp = new RegExp('^https?://.+?/');
+
 function initialize() {
-  var madison = new google.maps.LatLng(43.0667, -89.4000), 
+  madison = new google.maps.LatLng(43.0667, -89.4000), 
       mapOptions = {
         center: madison,
         zoom: 12, 
@@ -43,7 +79,11 @@ function initialize() {
 
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-  infowindow = new google.maps.InfoWindow();
+  infoWindow = new google.maps.InfoWindow({
+      content: document.getElementById('info-content')
+      });
+
+  document.getElementById('info-content').style.display = 'none';
 
   var input = document.getElementById('pac-input');
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -86,7 +126,6 @@ function ListControl(controlDiv, map) {
   controlUI.style.backgroundColor = 'white';
   controlUI.style.borderStyle = 'solid';
   controlUI.style.borderWidth = '1px';
-  controlUI.style.cursor = 'pointer';
   controlUI.style.textAlign = 'center';
   controlUI.title = 'List of gyms returned by search';
   controlDiv.appendChild(controlUI);
@@ -95,6 +134,7 @@ function ListControl(controlDiv, map) {
   controlList = document.createElement('ul');
   controlList.style.listStyleType = 'none'; 
   controlList.style.maxHeight = '500px';
+  controlList.style.maxWidth = '300px';
   controlList.style.overflowY = 'auto';
   controlList.style.overflowX = 'hidden';
   controlList.style.fontFamily = 'Arial,sans-serif';
@@ -103,10 +143,10 @@ function ListControl(controlDiv, map) {
   controlList.style.margin = '0px';
   controlUI.appendChild(controlList);
 
-  // Setup the click event listeners: simply set the map to Chicago.
-  google.maps.event.addDomListener(controlUI, 'click', function() {
-    map.setCenter(madison)
-  });
+  // Setup the click event listeners
+  // google.maps.event.addDomListener(controlUI, 'click', function() {
+  //   map.setCenter(madison)
+  // });
 }
 
 // When the user selects a city, perform a nearbySearch() 
@@ -135,6 +175,7 @@ function callback(results, status) {
     gyms = results;
     for (var i = 0; i < gyms.length; i++) {
       markers[i] = createMarker(gyms[i]);
+      markers[i].placeResult = gyms[i];
     }
   }
   buildListView();
@@ -147,10 +188,7 @@ function createMarker(place) {
     position: placeLoc
   });
 
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.setContent(place.name);
-    infowindow.open(map, this);
-  });
+  google.maps.event.addListener(marker, 'click', showInfoWindow);
 
   return marker;
 }
@@ -171,8 +209,80 @@ function buildListView() {
       var li = document.createElement('li');
       li.innerHTML = gyms[i].name;
       li.style.padding = '15px';
+      li.style.cursor = 'pointer';
+      li.setAttribute("id", gyms[i].name);
       controlList.appendChild(li);
+      google.maps.event.addDomListener(li, 'click', function() {
+        alert("You've clicked on a gym!");
+      });
     }
+  }
+}
+
+// TODO - Refactor the below function to be adaptable to my app!
+// Get the place details for a hotel. Show the information in an info window,
+// anchored on the marker for the hotel that the user selected.
+function showInfoWindow() {
+  // alert("You've clicked on a marker!");
+  var marker = this;
+  service.getDetails({placeId: marker.placeResult.place_id},
+    function(place, status) {
+      if (status != google.maps.places.PlacesServiceStatus.OK) {
+        return;
+      }
+      document.getElementById('info-content').style.display = 'initial';
+      infoWindow.open(map, marker);
+      buildIWContent(place);
+    });
+}
+
+// Load the place information into the HTML elements used by the info window.
+function buildIWContent(place) {
+  document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
+      'src="' + place.icon + '"/>';
+  document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
+      '">' + place.name + '</a></b>';
+  document.getElementById('iw-address').textContent = place.vicinity;
+
+  if (place.formatted_phone_number) {
+    document.getElementById('iw-phone-row').style.display = '';
+    document.getElementById('iw-phone').textContent =
+        place.formatted_phone_number;
+  } else {
+    document.getElementById('iw-phone-row').style.display = 'none';
+  }
+
+  // Assign a five-star rating to the hotel, using a black star ('&#10029;')
+  // to indicate the rating the hotel has earned, and a white star ('&#10025;')
+  // for the rating points not achieved.
+  if (place.rating) {
+    var ratingHtml = '';
+    for (var i = 0; i < 5; i++) {
+      if (place.rating < (i + 0.5)) {
+        ratingHtml += '&#10025;';
+      } else {
+        ratingHtml += '&#10029;';
+      }
+    document.getElementById('iw-rating-row').style.display = '';
+    document.getElementById('iw-rating').innerHTML = ratingHtml;
+    }
+  } else {
+    document.getElementById('iw-rating-row').style.display = 'none';
+  }
+
+  // The regexp isolates the first part of the URL (domain plus subdomain)
+  // to give a short URL for displaying in the info window.
+  if (place.website) {
+    var fullUrl = place.website;
+    var website = hostnameRegexp.exec(place.website);
+    if (website == null) {
+      website = 'http://' + place.website + '/';
+      fullUrl = website;
+    }
+    document.getElementById('iw-website-row').style.display = '';
+    document.getElementById('iw-website').textContent = website;
+  } else {
+    document.getElementById('iw-website-row').style.display = 'none';
   }
 }
 
@@ -186,6 +296,31 @@ google.maps.event.addDomListener(window, 'load', initialize);
       placeholder="Start typing city name, then select a city from list">
 
     <div id="map-canvas"></div>
+
+    <div id="info-content">
+      <table>
+        <tr id="iw-url-row" class="iw_table_row">
+          <td id="iw-icon" class="iw_table_icon"></td>
+          <td id="iw-url"></td>
+        </tr>
+        <tr id="iw-address-row" class="iw_table_row">
+          <td class="iw_attribute_name">Address:</td>
+          <td id="iw-address"></td>
+        </tr>
+        <tr id="iw-phone-row" class="iw_table_row">
+          <td class="iw_attribute_name">Telephone:</td>
+          <td id="iw-phone"></td>
+        </tr>
+        <tr id="iw-rating-row" class="iw_table_row">
+          <td class="iw_attribute_name">Rating:</td>
+          <td id="iw-rating"></td>
+        </tr>
+        <tr id="iw-website-row" class="iw_table_row">
+          <td class="iw_attribute_name">Website:</td>
+          <td id="iw-website"></td>
+        </tr>
+      </table>
+    </div>
 
   </body>
 </html>

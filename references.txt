@@ -59,3 +59,21 @@ http://stackoverflow.com/questions/20746745/adding-scroll-bar-to-dynamic-ul-li
 
 w3schools article - CSS Image Opacity / Transparency
 http://www.w3schools.com/css/css_image_transparency.asp
+
+Stackoverflow post - setting the id attribute of an input element javascript
+http://stackoverflow.com/questions/4851699/setting-the-id-attribute-of-an-input-element-dynamically-in-ie-alternative-for
+
+Mozilla article on Document.getElementById()
+https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById
+
+w3schools article - Window alert() Method
+http://www.w3schools.com/jsref/met_win_alert.asp
+
+Stackoverflow post - CSS: Change Background Color on Hover
+http://stackoverflow.com/questions/20289481/css-change-background-color-on-hover
+
+w3schools article - Style visibility Property
+http://www.w3schools.com/jsref/prop_style_visibility.asp
+
+w3schools article - Style display Property
+http://www.w3schools.com/jsref/prop_style_display.asp

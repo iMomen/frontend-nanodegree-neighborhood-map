@@ -58,7 +58,10 @@ var madison,
     infoWindow, 
     autocomplete, 
     service, 
-    controlList;
+    controlList, 
+    messageDiv; 
+
+var infoWindowCounter = false;  
 
 var markers = [], 
     gyms = [];
@@ -94,6 +97,12 @@ function initialize() {
   var listControl = new ListControl(listControlDiv, map);
   map.controls[google.maps.ControlPosition.LEFT_TOP].push(listControlDiv);
 
+  // Create the 'Find a gym near you!' message div and 
+  // push it onto the map canvas as a map control
+  messageDiv = document.createElement('div');
+  messageDiv = buildMessageDiv(messageDiv);
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(messageDiv);
+
   autocomplete = new google.maps.places.Autocomplete(input, autocompleteOptions);
   service = new google.maps.places.PlacesService(map);
 
@@ -104,6 +113,7 @@ function initialize() {
   };
   service.nearbySearch(request, callback);
   google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
+  console.log(messageDiv);
 }
 
 /**
@@ -164,11 +174,22 @@ function onPlaceChanged() {
     };
     service.nearbySearch(request, callback);
     buildListView();
+    messageDiv.style.fontSize = '14px';
+    messageDiv.innerHTML = '<h1>Here are the top 20 gyms in your city. Click to see more.</h1>';
   } else {
     document.getElementById('pac-input').placeholder = 'Start typing city name, then select a city from list';
   }
+}
+
+function buildMessageDiv(messageDiv) {
+  messageDiv.innerHTML = '<h1>Find a gym near you!</h1>';
+  messageDiv.style.textAlign = 'center';
+  messageDiv.style.fontSize = '20px';
+  messageDiv.style.visibility = 'visible';
+  return messageDiv;
 
 }
+
 
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -219,7 +240,6 @@ function buildListView() {
   }
 }
 
-// TODO - Refactor the below function to be adaptable to my app!
 // Get the place details for a hotel. Show the information in an info window,
 // anchored on the marker for the hotel that the user selected.
 function showInfoWindow() {
@@ -229,10 +249,13 @@ function showInfoWindow() {
     function(place, status) {
       if (status != google.maps.places.PlacesServiceStatus.OK) {
         return;
+      } 
+      if (infoWindowCounter === false) {  
+        document.getElementById('info-content').style.display = 'initial';
       }
-      document.getElementById('info-content').style.display = 'initial';
       infoWindow.open(map, marker);
       buildIWContent(place);
+      infoWindowCounter = true;
     });
 }
 

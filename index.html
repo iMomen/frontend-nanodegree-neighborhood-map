@@ -61,7 +61,7 @@ var madison,
     controlList, 
     messageDiv; 
 
-var infoWindowCounter = false;  
+var anyInfoWindowSeenAlready = false;  
 
 var markers = [], 
     gyms = [];
@@ -113,7 +113,6 @@ function initialize() {
   };
   service.nearbySearch(request, callback);
   google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
-  console.log(messageDiv);
 }
 
 /**
@@ -250,12 +249,12 @@ function showInfoWindow() {
       if (status != google.maps.places.PlacesServiceStatus.OK) {
         return;
       } 
-      if (infoWindowCounter === false) {  
+      if (anyInfoWindowSeenAlready === false) {  
         document.getElementById('info-content').style.display = 'initial';
       }
       infoWindow.open(map, marker);
       buildIWContent(place);
-      infoWindowCounter = true;
+      anyInfoWindowSeenAlready = true;
     });
 }
 

@@ -172,9 +172,8 @@ function onPlaceChanged() {
       types: ['gym']
     };
     service.nearbySearch(request, callback);
-    buildListView();
     messageDiv.style.fontSize = '14px';
-    messageDiv.innerHTML = '<h1>Here are the top 20 gyms in your city. Click to see more.</h1>';
+    messageDiv.innerHTML = '<h1>Here are the top 20 gyms in your city. Click to see details.</h1>';
   } else {
     document.getElementById('pac-input').placeholder = 'Start typing city name, then select a city from list';
   }
@@ -227,14 +226,14 @@ function buildListView() {
   for (var i = 0; i < gyms.length; i++) {
     if (gyms[i]) {
       var li = document.createElement('li');
+      li.onclick = function() {
+        google.maps.event.trigger(markers[i], 'click');
+      };
       li.innerHTML = gyms[i].name;
       li.style.padding = '15px';
       li.style.cursor = 'pointer';
       li.setAttribute("id", gyms[i].name);
       controlList.appendChild(li);
-      google.maps.event.addDomListener(li, 'click', function() {
-        alert("You've clicked on a gym!");
-      });
     }
   }
 }
@@ -242,7 +241,6 @@ function buildListView() {
 // Get the place details for a hotel. Show the information in an info window,
 // anchored on the marker for the hotel that the user selected.
 function showInfoWindow() {
-  // alert("You've clicked on a marker!");
   var marker = this;
   service.getDetails({placeId: marker.placeResult.place_id},
     function(place, status) {

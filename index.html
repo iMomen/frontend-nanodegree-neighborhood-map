@@ -225,17 +225,22 @@ function buildListView() {
   controlList.innerHTML = '';
   for (var i = 0; i < gyms.length; i++) {
     if (gyms[i]) {
-      var li = document.createElement('li');
-      li.onclick = function() {
-        google.maps.event.trigger(markers[i], 'click');
-      };
-      li.innerHTML = gyms[i].name;
-      li.style.padding = '15px';
-      li.style.cursor = 'pointer';
-      li.setAttribute("id", gyms[i].name);
-      controlList.appendChild(li);
+      clickableLink(i);
     }
   }
+}
+
+function clickableLink(i) {
+  var li = document.createElement('li');
+  li.onclick = function() {
+    google.maps.event.trigger(markers[i], 'click'); //<<--This line!
+  };
+  li.innerHTML = gyms[i].name;
+  li.style.padding = '15px';
+  li.style.cursor = 'pointer';
+  li.setAttribute("id", gyms[i].name);
+  controlList.appendChild(li);
+
 }
 
 // Get the place details for a hotel. Show the information in an info window,

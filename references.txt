@@ -89,3 +89,10 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Op
 
 Mozilla - JavaScript String Documentation - String.prototype.replace()
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
+
+Forum Post on Udacity Forums - How to make AJAX request to Yelp API
+http://discussions.udacity.com/t/how-to-make-ajax-request-to-yelp-api/13699/4
+
+Eran Hammer's Guide to OAuth 1.0 
+http://hueniverse.com/oauth/guide/
+

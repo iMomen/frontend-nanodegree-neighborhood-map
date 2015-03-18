@@ -64,6 +64,7 @@
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
     <script src="js/libs/jquery.min.js"></script>
+    <script src="js/libs/oauth-signature.min.js"></script>
     <script>
 var madison, 
     map, 
@@ -71,7 +72,12 @@ var madison,
     autocomplete, 
     service, 
     controlList, 
-    messageDiv; 
+    messageDiv, 
+    YELP_BASE_URL, 
+    YELP_CONSUMER_KEY, 
+    YELP_TOKEN, 
+    YELP_CONSUMER_SECRET, 
+    YELP_TOKEN_SECRET; 
 
 var anyInfoWindowSeenAlready = false;  
 
@@ -79,6 +85,12 @@ var markers = [],
     gyms = [];
 
 var hostnameRegexp = new RegExp('^https?://.+?/');
+
+YELP_BASE_URL = 'http://api.yelp.com/v2/phone_search?phone=';
+YELP_CONSUMER_KEY = 'Uky44ufZTCAZp-rjVzlZGg';
+YELP_TOKEN = 'HBwyOjVwHOaRO3koTMR0daGeXgs5e9N6'; 
+YELP_CONSUMER_SECRET = 'dFpoQYisITg61-1977ySGBk1YOE'; 
+YELP_TOKEN_SECRET = '4R5P8x1PphSOdx7w26H_48mVmW0';  
 
 function initialize() {
   madison = new google.maps.LatLng(43.0667, -89.4000), 
@@ -274,6 +286,14 @@ function showInfoWindow() {
     });
 }
 
+/**
+ * Generates a random number and returns it as a string for OAuthentication
+ * @return {string}
+ */
+function generateNonce() {
+  return (Math.floor(Math.random() * 1e12).toString());
+}
+
 // Load the place information into the HTML elements used by the info window.
 function buildIWContent(place) {
   document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
@@ -331,12 +351,42 @@ function buildIWContent(place) {
     var phoneNumber = place.formatted_phone_number;
     var re = /\D/gi; 
     phoneNumber = phoneNumber.replace(re, '');
-    // Build url and make AJAX call to the Yelp API 
-    // var yelpURL = 'http://api.yelp.com/v2/phone_search?phone=' + phoneNumber;
-    // $.getJSON(yelpURL, function (data) {
-    //   console.log(data);
-    // });
-    // console.log(phoneNumber);
+    
+    var yelpURL = YELP_BASE_URL + phoneNumber;
+
+    var parameters = {
+      oauth_consumer_key: YELP_CONSUMER_KEY,
+      oauth_token: YELP_TOKEN,
+      oauth_nonce: generateNonce(),
+      oauth_timestamp: Math.floor(Date.now()/1000),
+      oauth_signature_method: 'HMAC-SHA1',
+      oauth_version : '1.0',
+      callback: 'cb'              // This is crucial to include for jsonp implementation in 
+                                  // AJAX or else the oauth-signature will be wrong.
+    };
+
+    var encodedSignature = oauthSignature.generate('GET',yelpURL, parameters, YELP_CONSUMER_SECRET, YELP_TOKEN_SECRET);
+    parameters.oauth_signature = encodedSignature;
+
+    var settings = {
+      url: yelpURL,
+      data: parameters,
+      cache: true,  //        <----  This is crucial to include as well to prevent jQuery from 
+                                  // adding on a cache-buster parameter "_=23489489749837", 
+                                  // invalidating our oauth-signature
+      dataType: 'jsonp',
+      success: function(results) {
+        // Do stuff with results
+        console.log(results);
+      },
+      fail: function() {
+        // Do stuff on fail
+        console.log('AJAX request has failed :(');
+      }
+    };
+
+    // Send AJAX request via jQuery library
+    $.ajax(settings);
   };
 }
 

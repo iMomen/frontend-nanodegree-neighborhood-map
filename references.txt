@@ -77,3 +77,15 @@ http://www.w3schools.com/jsref/prop_style_visibility.asp
 
 w3schools article - Style display Property
 http://www.w3schools.com/jsref/prop_style_display.asp
+
+Mozilla article on Regular Expressions
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+
+Stackoverflow post - JavaScript - Remove character from a string 
+http://stackoverflow.com/questions/9932957/javascript-remove-character-from-a-string
+
+Mozilla article on JavaScript Expressions and operators
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Comparison_operators
+
+Mozilla - JavaScript String Documentation - String.prototype.replace()
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace

@@ -1,0 +1,66 @@
+html, body, #map-canvas {
+  height: 100%;
+  margin: 0px;
+  padding: 0px
+}
+#pac-input {
+  width: 350px; 
+  height: 25px;
+  font-size: 16px; 
+  margin: 10px; 
+  padding: 5px
+}
+a {
+  text-decoration: none;
+}
+ul {
+  z-index: 2; /* Fixes infoWindow and list view overlap issue */
+}
+li:hover {
+  background: gray;
+  color: white;
+}
+table {
+  font-size: 12px;
+}
+.placeIcon {
+  width: 20px;
+  height: 34px;
+  margin: 4px;
+}
+.hotelIcon {
+  width: 24px;
+  height: 24px;
+}
+#rating {
+  font-size: 13px;
+  font-family: Arial Unicode MS;
+}
+#iw-reviews-row {
+  font-size: 14px;
+}
+#iw-url-row {
+  font-size: 20px; 
+}
+#iw-address-row, #iw-phone-row, 
+#iw-rating-row, #iw-website-row {
+  font-size: 14px; 
+}
+.iw_table_row {
+  height: 18px;
+}
+.iw_attribute_name {
+  font-weight: bold;
+  text-align: right;
+}
+.iw_table_icon {
+  text-align: right;
+}
+li {
+  font-size: 18px;
+  font-weight: bold; 
+}
+.list-view-small {
+  font-size: 14px;
+  font-weight: normal;  
+}

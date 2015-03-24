@@ -96,3 +96,8 @@ http://discussions.udacity.com/t/how-to-make-ajax-request-to-yelp-api/13699/4
 Eran Hammer's Guide to OAuth 1.0 
 http://hueniverse.com/oauth/guide/
 
+Documentation - Google Maps JavaScript API
+https://developers.google.com/maps/documentation/javascript/reference
+
+Google Developers Hangout - Places API - Radar Search and Place Photos
+https://www.youtube.com/watch?v=RNIjbYl8K4U

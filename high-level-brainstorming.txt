@@ -76,12 +76,15 @@ the city defaults to my city (Madison, WI)
 
 implement button labeled "Use Current Location" and the app will grab the current location of the user and display the appropriate results
 
-					Integrating with Yelp API
-					-------------------------
+	Adding More Functionality Using the Places Library in the Google Maps JavaScript API
+	------------------------------------------------------------------------------------
 
-grab gym phone number from google place
-use phone number to lookup gym in the yelp API
-grab photos from yelp API and display them in the app
+open now info
+
+photos 
+
+reviews 
+
 
 
 					Google APIs to possibly use
